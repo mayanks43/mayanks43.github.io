@@ -1,2 +1,2 @@
 # mayanks43.github.io
-My Website
+Code for Website
