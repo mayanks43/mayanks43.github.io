@@ -1,5 +1,11 @@
 name: Jekyll site CI
 
+# Build check only — GitHub Pages builds and deploys the site itself, so this
+# job just catches a broken build (bad _config.yml, invalid front matter)
+# before it reaches the live site. It installs the Gemfile so the Jekyll
+# version matches Pages (github-pages -> Jekyll 3.10), unlike the
+# jekyll/builder container this replaced.
+
 on:
   push:
     branches: [ "main" ]
@@ -13,8 +19,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the site in the jekyll/builder container
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+        bundler-cache: true
+    - name: Build the site
+      run: bundle exec jekyll build --future
