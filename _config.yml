@@ -183,6 +183,36 @@ exclude:
   - Rakefile
   - README
   - tmp
+  # --- Unused academicpages template content -------------------------------
+  # Files are kept in the repo but not built, so these URLs 404 instead of
+  # serving placeholder text. Comment a line out to bring that page back.
+  - _posts               # lorem ipsum sample posts
+  - _talks               # "Talk 1 on Relevant Topic in Your Field"
+  - _teaching            # "Teaching experience 1, University 1, Department"
+  - _portfolio           # "Portfolio item number 1"
+  - _drafts
+  - _pages/talks.html
+  - _pages/teaching.html
+  - _pages/portfolio.html
+  - _pages/talkmap.html
+  - talkmap
+  - _pages/year-archive.html      # empty once _posts is excluded
+  - _pages/category-archive.html  # empty: no post sets `categories`
+  - _pages/tag-archive.html       # only ever listed the sample posts
+  - _pages/markdown.md            # how-to for editing this template
+  - _pages/archive-layout-with-content.md
+  - _pages/collection-archive.html
+  - _pages/non-menu-page.md
+  - _pages/page-archive.html
+  - _pages/terms.md               # theme author's boilerplate privacy policy
+  - _pages/sitemap.md             # human-readable index; sitemap.xml still built for crawlers
+  - files/paper1.pdf
+  - files/paper2.pdf
+  - files/paper3.pdf
+  - files/slides1.pdf
+  - files/slides2.pdf
+  - files/slides3.pdf
+  # -------------------------------------------------------------------------
   - vendor
 keep_files:
   - .git
@@ -324,11 +354,14 @@ whitelist:
 #  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
 #  - <base_path/categories/my-awesome-category/index.html ~> path: /categories/
 #  - <base_path/my-awesome-category/index.html ~> path: /
+# Disabled: the /categories/ and /tags/ archives are excluded above, so leaving
+# `type` set would print "Categories: conferences" links on each publication
+# page that lead to a 404. Restore `type: liquid` to bring the archives back.
 category_archive:
-  type: liquid
+  type:
   path: /categories/
 tag_archive:
-  type: liquid
+  type:
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
 # jekyll-archives:
